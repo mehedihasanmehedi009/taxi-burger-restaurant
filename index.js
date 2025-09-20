@@ -1,4 +1,14 @@
 //  categoriesContainer
+const loading = (load) => {
+  if (load == true) {
+    document.getElementById("loading").classList.remove("hidden");
+    document.getElementById("food-container").classList.add("hidden");
+  } else {
+    document.getElementById("food-container").classList.remove("hidden");
+    document.getElementById("loading").classList.add("hidden");
+  }
+};
+
 const lodCategories = () => {
   fetch(" https://taxi-kitchen-api.vercel.app/api/v1/categories")
     .then((res) => res.json())
@@ -14,7 +24,7 @@ const DisplayCategories = (categories) => {
     // console.log(item);
     const categoriesCard = document.createElement("div");
     categoriesCard.innerHTML = `
-       <button onclick="lodFood(${item.id})" class="btn btn-block shadow btn-category mt-2 md:justify-start items-center rounded-lg">
+       <button id="item-btn-${item.id}" onclick="lodFood(${item.id})" class="btn btn-block shadow btn-category mt-2 md:justify-start items-center rounded-lg">
             <img 
               src=${item.categoryImg}
               alt=""
@@ -23,18 +33,26 @@ const DisplayCategories = (categories) => {
           </button>
           
       `;
+
     categoriesContainer.appendChild(categoriesCard);
   }
 };
 //  foodall lod
-const LodFood = () => {
+const LodFoods = () => {
   fetch(`https://taxi-kitchen-api.vercel.app/api/v1/foods/random/`)
     .then((res) => res.json())
     .then((data) => DisplayFood(data.foods));
 };
 
-//  foodContainer
+//  foodContain
 const lodFood = (id) => {
+  // btn color
+  loading(true);
+  const nums = document.querySelectorAll(".btn-category");
+  nums.forEach((btn) => btn.classList.remove("Active"));
+  const mun = document.getElementById(`item-btn-${id}`);
+  mun.classList.add("Active");
+
   fetch(`https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`)
     .then((res) => res.json())
     .then((data) => DisplayFood(data.foods));
@@ -76,7 +94,10 @@ const DisplayFood = (Food) => {
             </div>
           </div>
         `;
+
     foodContainer.appendChild(FoodCard);
+
+    loading(false);
   }
 };
 
@@ -110,10 +131,11 @@ const DitailsContainer = (Zoom) => {
           </div>
            
   `;
+
   document.getElementById("my_modal_5").showModal();
 
   // console.log(Zoom);
 };
 
-LodFood();
+LodFoods();
 lodCategories();
