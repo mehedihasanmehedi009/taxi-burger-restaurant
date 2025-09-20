@@ -71,7 +71,7 @@
       class="grid grid-cols-1 md:grid-cols-12 gap-5 mt-10 w-11/12 mx-auto min-h-screen py-4"
     >
       <section
-        class="bg-[#FEBF00] col-span-1 md:col-span-2 rounded-xl p-3 h-[830px] md:sticky top-0"
+        class="bg-[#FEBF00] col-span-1 md:col-span-2 rounded-xl p-3 h-[955px] md:sticky top-0"
       >
         <h1 class="text-xl font-bold text-center bg-white rounded-2xl">
           Cateogries
@@ -129,6 +129,20 @@
         </div>
       </section>
     </main>
+
+    <!-- Open the modal using ID.() method -->
+    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <div id="daitail-Cantainer"></div>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
     <script src="index.js"></script>
   </body>
 </html>
